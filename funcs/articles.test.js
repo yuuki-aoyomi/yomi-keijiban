@@ -23,6 +23,6 @@ test('insertArticle', async (t) => {
     assert.strictEqual(insertOne.mock.callCount(), 1, '一度だけinsertOneが呼ばれる')
 })
 
-test('insertArticle: db error', async(t)=>{
+// test('insertArticle: db error', async(t)=>{
     
-})
+// })
