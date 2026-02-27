@@ -11,10 +11,18 @@
 <body>
   <ul class="article-list">
     <% for (const article of articles) { %>
-      <li class="article-name"><%= article %></li>
+      <li class="article-title">
+        <a href="/article/<%= article._id %>">
+          <%= article.title %>
+        </a>
+      </li>
     <% } %>
   </ul>
-  <input type="text" class="input-text" />
+  <p>title</p>
+  <input type="text" class="input-title" />
+  <br>
+  <p>content</p>
+  <textarea class="input-content"></textarea>
   <button class="send-button">送信</button>
   <script src="/static/index.js" defer></script>
 </body>

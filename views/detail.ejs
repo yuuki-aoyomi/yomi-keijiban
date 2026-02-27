@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        <%= article.title %>
+    </title>
+</head>
+
+<body>
+
+    <h1>
+        <%= article.title %>
+    </h1>
+    <p>
+        <%= article.content %>
+    </p>
+    <p>
+        <%= article.date %>
+    </p>
+    <br>
+    <ul class="comment-list">
+        <% for (const comment of article.comments) { %>
+            <li class="article-comment">
+                <%= comment %>
+            </li>
+        <% } %>
+    </ul>
+
+    <a href="/">戻る</a>
+
+</body>
+
+</html>
