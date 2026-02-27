@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('node:path');
-const { insertArticle, getArticles } = require('./funcs/articles');
+const { insertArticle, getArticles, insertComment } = require('./funcs/articles');
 const { MongoClient, ObjectId } = require('mongodb');
 
 
@@ -45,6 +45,13 @@ async function main() {
         const { status, body } = await insertArticle({ title, content }, db);
         res.status(status).send(body);
     });
+
+    app.post('/api/comment', express.json(), async (req, res) => {
+        const articleId = req.body.articleId;
+        const comment = req.body.comment;
+        const { status, body } = await insertComment({ articleId, comment }, db);
+        res.status(status).send(body);
+    })
 
     app.listen(3000, () => {
         console.log('start listening');
