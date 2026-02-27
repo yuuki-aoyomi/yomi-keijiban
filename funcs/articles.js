@@ -50,3 +50,18 @@ async function getArticles(db) {
     }
 }
 exports.getArticles = getArticles;
+
+async function openArticle(id, db) {
+    try {
+        const article = await db.collection('article')
+            .findOne({ _id: new ObjectId(id) });
+
+        if (!article) {
+            return { status: 404, body: 'not found' };
+        }
+        return { status: 200, body: article };
+    } catch (err) {
+        return { status: 400, body: 'invalid id' };
+    }
+}
+exports.openArticle = openArticle;

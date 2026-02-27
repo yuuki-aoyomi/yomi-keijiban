@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('node:path');
-const { insertArticle, getArticles, insertComment } = require('./funcs/articles');
+const { insertArticle, getArticles, insertComment, openArticle } = require('./funcs/articles');
 const { MongoClient, ObjectId } = require('mongodb');
 
 
@@ -24,19 +24,11 @@ async function main() {
 
     app.get('/article/:id', async (req, res) => {
         const id = req.params.id;
-
-        try {
-            const article = await db.collection('article')
-                .findOne({ _id: new ObjectId(id) });
-
-            if (!article) {
-                return res.status(404).send('not found');
-            }
-
-            res.render(path.resolve(__dirname, 'views/detail.ejs'), { article });
-        } catch (err) {
-            res.status(400).send('invalid id');
+        const { status, body } = await openArticle(id, db);
+        if (status !== 200) {
+            return res.status(status).send(body);
         }
+        res.render(path.resolve(__dirname, 'views/detail.ejs'), { article: body });
     });
 
     app.post('/api/article', express.json(), async (req, res) => {
