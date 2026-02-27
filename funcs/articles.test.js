@@ -2,7 +2,6 @@ const { test } = require('node:test');
 const assert = require('node:assert');
 
 const { insertArticle } = require('./articles');
-const { Collection } = require('mongodb');
 
 test('insertArticle', async (t) => {
     const insertOne = t.mock.fn();
